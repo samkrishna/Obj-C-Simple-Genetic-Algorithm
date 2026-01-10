@@ -11,10 +11,6 @@
 
 @implementation JASAppDelegate
 
-@synthesize window = _window;
-@synthesize textView = _textView;
-@synthesize textField = _textField;
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 }
@@ -34,12 +30,32 @@
     JASGeneticAlgo *algo = [[JASGeneticAlgo alloc] initWithTargetSequence:targetString];
     [algo execute];
     NSTimeInterval runtime = [start timeIntervalSinceNow] * -1;
-    NSString *msg = [NSString stringWithFormat:
-                     @"Output Sequence: %@\nElapsed Generations: %d\nDuration: %.2f seconds", 
+    NSString *msg = [NSString stringWithFormat:@"Output Sequence: %@\nElapsed Generations: %ld\nDuration: %.2f seconds",
                      algo.result, 
-                     algo.generations, 
+                     (long)algo.generations, 
                      runtime];
     [self.textView setString:msg];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+
+    // Force menu validation
+    [[NSApp mainMenu] update];
+
+    // Ensure all submenus have correct parent references
+    [self validateMenuHierarchy:[NSApp mainMenu]];
+}
+
+- (void)validateMenuHierarchy:(NSMenu *)menu {
+    if (!menu) return;
+
+    for (NSMenuItem *item in menu.itemArray) {
+        if (item.submenu) {
+            item.submenu.supermenu = menu;
+            [self validateMenuHierarchy:item.submenu];
+        }
+    }
 }
 
 @end

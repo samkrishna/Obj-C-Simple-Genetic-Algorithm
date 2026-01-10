@@ -18,8 +18,8 @@
 #define RANDOM_MOD(__MOD)  (arc4random_uniform(__MOD))      // Creates a random positive whole number no greater than __MOD-1 
 
 @interface JASChromosome ()
-@property (nonatomic, strong) NSNumber        *cachedOverallFitness;
-@property (nonatomic, strong) NSMutableArray  *fitnessBuffer;
+@property (nonatomic, strong) NSNumber *cachedOverallFitness;
+@property (nonatomic, strong) NSMutableArray *fitnessBuffer;
 @property (nonatomic, strong) NSMutableString *geneBuffer;
 
 // Calculates the overall fitness of this chromosome's gene sequence, 
@@ -27,42 +27,36 @@
 - (NSInteger)fitnessForTargetSequence:(NSString *)seq;
 
 // Calculates the fitness of one gene in the chromosome.
-- (NSInteger)fitnessOfGeneAtIndex:(NSUInteger)geneIndex 
-                forTargetSequence:(NSString *)seq;
+- (NSInteger)fitnessOfGeneAtIndex:(NSUInteger)geneIndex forTargetSequence:(NSString *)seq;
 
 // Performs a random mutation on one gene in the chromosome.
 - (void)mutate;
+
 @end
 
 
 @implementation JASChromosome
 
-@synthesize cachedOverallFitness;
-@synthesize fitnessBuffer;
-@synthesize geneBuffer;
-
-@dynamic geneSequence;
 - (NSString *)geneSequence
 {
-    return [NSString stringWithString:geneBuffer];
+    return [NSString stringWithString:self.geneBuffer];
 }
 
 - (id)initWithGeneCount:(NSUInteger)count
 {
-    self = [super init];
-    if (self)
-    {
-        self.fitnessBuffer = [NSMutableArray arrayWithCapacity:count];
-        self.geneBuffer = [NSMutableString stringWithCapacity:count];
-        for (int geneIndex = 0; geneIndex < count; ++geneIndex) 
-        {
-            // Append a random character between ' ' and 'Z'.
-            int value = RANDOM_MOD(LAST_CHAR - FIRST_CHAR);
-            value += FIRST_CHAR;
-            NSString *gene = [NSString stringWithFormat:@"%c", value];
-            [self.geneBuffer appendString:gene];
-        }
+    if (!(self = [super init])) { return nil; }
+
+    self.fitnessBuffer = [NSMutableArray arrayWithCapacity:count];
+    self.geneBuffer = [NSMutableString stringWithCapacity:count];
+
+    for (int geneIndex = 0; geneIndex < count; ++geneIndex) {
+        // Append a random character between ' ' and 'Z'.
+        int value = RANDOM_MOD(LAST_CHAR - FIRST_CHAR);
+        value += FIRST_CHAR;
+        NSString *gene = [NSString stringWithFormat:@"%c", value];
+        [self.geneBuffer appendString:gene];
     }
+
     return self;
 }
 
@@ -80,16 +74,13 @@
     
     // Fill the new chromosome's gene buffer with
     // the fittest genes from both parents.
-    for (int i = 0; i < count; ++i)
-    {
+    for (int i = 0; i < count; ++i) {
         // Get the same gene from both chromosomes.
         mine   = [self.fitnessBuffer  objectAtIndex:i];
         theirs = [other.fitnessBuffer objectAtIndex:i]; 
 
         // Determine which chromosome's gene is fitter.
-        winner = [mine integerValue] > [theirs integerValue] 
-        ? self 
-        : other;
+        winner = [mine integerValue] > [theirs integerValue] ? self : other;
         
         // Add the winner's gene to the child chromosome.
         geneValue = [winner.geneBuffer characterAtIndex:i];
@@ -98,18 +89,16 @@
     }
     
     // Sometimes randomly modify the child's gene sequence.
-    if (RANDOM() < MUTATION_THRESHOLD)
-    {
+    if (RANDOM() < MUTATION_THRESHOLD) {
         [child mutate];
     }
     
     return child;
 }
 
-- (BOOL)isFitterThanChromosome:(JASChromosome *)other 
-             forTargetSequence:(NSString *)seq
+- (BOOL)isFitterThanChromosome:(JASChromosome *)other forTargetSequence:(NSString *)seq
 {
-    NSInteger mine   = [self  fitnessForTargetSequence:seq];
+    NSInteger mine = [self  fitnessForTargetSequence:seq];
     NSInteger theirs = [other fitnessForTargetSequence:seq];
     return mine > theirs;
 }
@@ -118,33 +107,31 @@
 
 - (NSInteger)fitnessForTargetSequence:(NSString *)seq
 {
-    if (!self.cachedOverallFitness)
-    {
+    if (!self.cachedOverallFitness) {
         // The lower the fitness, the less the 
         // chromosome matches the target sequence. 
         // 0 is a perfect match.
         NSInteger overallFitness = 0, fitness = 0;
         NSNumber *box = nil;
         NSUInteger count = seq.length;
-        for (int i = 0; i < count; ++i) 
-        {
-            fitness = [self fitnessOfGeneAtIndex:i 
-                               forTargetSequence:seq];
+
+        for (int i = 0; i < count; ++i) {
+            fitness = [self fitnessOfGeneAtIndex:i forTargetSequence:seq];
             box = [NSNumber numberWithInteger:fitness];
             [self.fitnessBuffer addObject:box];
             overallFitness += fitness;
         }
-        self.cachedOverallFitness = 
-          [NSNumber numberWithInteger:overallFitness];
+
+        self.cachedOverallFitness = [NSNumber numberWithInteger:overallFitness];
     }
+
     return [self.cachedOverallFitness integerValue];
 }
 
-- (NSInteger)fitnessOfGeneAtIndex:(NSUInteger)geneIndex 
-                forTargetSequence:(NSString *)seq
+- (NSInteger)fitnessOfGeneAtIndex:(NSUInteger)geneIndex forTargetSequence:(NSString *)seq
 {
-    unichar target = [seq        characterAtIndex:geneIndex];
-    unichar actual = [geneBuffer characterAtIndex:geneIndex];
+    unichar target = [seq characterAtIndex:geneIndex];
+    unichar actual = [self.geneBuffer characterAtIndex:geneIndex];
     return abs(target - actual) * -1;
 }
 
@@ -155,24 +142,26 @@
     // About half the time we should 
     // mutate to a lower character.
     BOOL negate = RANDOM_MOD(2) == 0;
-    if (negate)
+
+    if (negate) {
         delta *= -1;
+    }
     
     // Pick a gene at random to mutate.
-    NSUInteger geneIndex = RANDOM_MOD(self.geneBuffer.length);
+    NSUInteger geneIndex = RANDOM_MOD((uint32_t)self.geneBuffer.length);
     unichar gene = [self.geneBuffer characterAtIndex:geneIndex];
     
     // Make sure the mutated character is valid.
     unichar proposedGene = gene + delta;
-    if (proposedGene < FIRST_CHAR || proposedGene > LAST_CHAR)
+    if (proposedGene < FIRST_CHAR || proposedGene > LAST_CHAR) {
         delta *= -1;
+    }
     
     // Create and apply the mutated gene.
     unichar value = gene + delta;
     NSString *mutant = [NSString stringWithFormat:@"%c", value];
     NSRange range = (NSRange){ geneIndex, 1 };
-    [self.geneBuffer replaceCharactersInRange:range 
-                                   withString:mutant];
+    [self.geneBuffer replaceCharactersInRange:range withString:mutant];
     
     // Dirty the cached fitness value, in case it's already set.
     self.cachedOverallFitness = nil;

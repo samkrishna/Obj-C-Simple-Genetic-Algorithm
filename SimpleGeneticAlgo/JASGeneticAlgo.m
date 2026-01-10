@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *population;
 @property (nonatomic, copy) NSString *targetSequence;
 
-// Private methods
+//// Private methods
 - (void)populate;
 - (void)run;
 - (void)breedNextGeneration;
@@ -28,13 +28,7 @@
 
 @end
 
-
 @implementation JASGeneticAlgo
-
-@synthesize generations;
-@synthesize population;
-@synthesize result;
-@synthesize targetSequence;
 
 #define MAX_GENERATIONS  1000 // Prevents infinite loops.
 #define POPULATION_SIZE   750 // Must be an even number.
@@ -45,8 +39,7 @@
     if (self)
     {
         self.targetSequence = sequence;
-        self.population = 
-          [NSMutableArray arrayWithCapacity:POPULATION_SIZE];
+        self.population = [NSMutableArray arrayWithCapacity:POPULATION_SIZE];
     }
     return self;
 }
@@ -72,10 +65,7 @@
 
 - (void)run
 {
-    for (self.generations = 0; 
-         self.generations < MAX_GENERATIONS && !self.result; 
-         self.generations++)
-    {
+    for (self.generations = 0; (self.generations < MAX_GENERATIONS && !self.result); self.generations++) {
         [self breedNextGeneration];
         [self shufflePopulation];
         [self analyzePopulation];
@@ -95,25 +85,22 @@
  
     // Mate each two successive chromosomes and
     // replace the less fit parent with the child.
-    for (int i = 0; i < count; i += 2) 
-    {
+    for (int i = 0; i < count; i += 2) {
         index1 = i;
         index2 = i + 1;
         chromo1 = [self.population objectAtIndex:index1];
         chromo2 = [self.population objectAtIndex:index2];
-        keepFirst = [chromo1 isFitterThanChromosome:chromo2 
-                                  forTargetSequence:seq];
+        keepFirst = [chromo1 isFitterThanChromosome:chromo2 forTargetSequence:seq];
         deadIndex = keepFirst ? index2 : index1;
         child = [chromo1 mateWithChromosome:chromo2];
-        [self.population replaceObjectAtIndex:deadIndex 
-                                   withObject:child];
+        [self.population replaceObjectAtIndex:deadIndex withObject:child];
     }
 }
 
 - (void)shufflePopulation
 {    
-    for (int i = 0; i < population.count; i++) {
-        [population exchangeObjectAtIndex:i withObjectAtIndex:arc4random_uniform((u_int32_t)population.count)];
+    for (int i = 0; i < self.population.count; i++) {
+        [self.population exchangeObjectAtIndex:i withObjectAtIndex:arc4random_uniform((u_int32_t)self.population.count)];
     }
 }
 
@@ -123,24 +110,21 @@
     // and see if matches the target sequence.
     JASChromosome *champion = nil;
     NSString *seq = self.targetSequence;
-    for (JASChromosome *contender in self.population) 
-    {
-        if (!champion || 
-            [contender isFitterThanChromosome:champion 
-                            forTargetSequence:seq])
-        {
+
+    for (JASChromosome *contender in self.population) {
+        if (!champion || [contender isFitterThanChromosome:champion forTargetSequence:seq]) {
             champion = contender;
         }
     }
+
     NSString *fittest = champion.geneSequence;
     BOOL matchesTarget = [fittest isEqualToString:seq];
-    if (matchesTarget)
-    {
+
+    if (matchesTarget) {
         self.result = fittest;
         NSLog(@"Matched the target sequence during generation #%ld", self.generations);
     }
-    else 
-    {
+    else {
         NSLog(@"Fittest sequence for generation #%ld: %@", self.generations, fittest);
     }
 }
