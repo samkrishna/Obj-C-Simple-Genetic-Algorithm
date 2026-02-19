@@ -18,9 +18,7 @@
 - (IBAction)handleRunAlgorithmButton:(id)sender 
 {
     [self.textView setString:@"Processing..."];
-    [self performSelector:@selector(runAlgorithm) 
-               withObject:nil 
-               afterDelay:0.1];
+    [self performSelector:@selector(runAlgorithm) withObject:nil afterDelay:0.1];
 }
 
 - (void)runAlgorithm

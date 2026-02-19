@@ -15,7 +15,21 @@
 		4175C596152BC32300AA1A1C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4175C594152BC32300AA1A1C /* MainMenu.xib */; };
 		4175C59E152BC70C00AA1A1C /* JASGeneticAlgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4175C59D152BC70C00AA1A1C /* JASGeneticAlgo.m */; };
 		4175C5A4152C02F700AA1A1C /* JASChromosome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4175C5A3152C02F700AA1A1C /* JASChromosome.m */; };
+		6FEE6EF12F4697E7008BFCE4 /* JASChromosome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4175C5A3152C02F700AA1A1C /* JASChromosome.m */; };
+		6FEE6EF22F4697EF008BFCE4 /* JASGeneticAlgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4175C59D152BC70C00AA1A1C /* JASGeneticAlgo.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6FEE6EE82F4696E2008BFCE4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4175C57B152BC32300AA1A1C /* SimpleGeneticAlgo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleGeneticAlgo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,7 +49,19 @@
 		4175C59D152BC70C00AA1A1C /* JASGeneticAlgo.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc.preprocessed; fileEncoding = 4; path = JASGeneticAlgo.m; sourceTree = "<group>"; };
 		4175C5A2152C02F700AA1A1C /* JASChromosome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASChromosome.h; sourceTree = "<group>"; };
 		4175C5A3152C02F700AA1A1C /* JASChromosome.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc.preprocessed; fileEncoding = 4; path = JASChromosome.m; sourceTree = "<group>"; };
+		6FEE6EEA2F4696E2008BFCE4 /* simplega */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = simplega; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6FEE6EEB2F4696E2008BFCE4 /* simplega */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFileTypes = {
+				main.m = sourcecode.c.objc.preprocessed;
+			};
+			path = simplega;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4175C578152BC32300AA1A1C /* Frameworks */ = {
@@ -46,6 +72,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6FEE6EE72F4696E2008BFCE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -53,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				4175C585152BC32300AA1A1C /* SimpleGeneticAlgo */,
+				6FEE6EEB2F4696E2008BFCE4 /* simplega */,
 				4175C57E152BC32300AA1A1C /* Frameworks */,
 				4175C57C152BC32300AA1A1C /* Products */,
 			);
@@ -62,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				4175C57B152BC32300AA1A1C /* SimpleGeneticAlgo.app */,
+				6FEE6EEA2F4696E2008BFCE4 /* simplega */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +175,28 @@
 			productReference = 4175C57B152BC32300AA1A1C /* SimpleGeneticAlgo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6FEE6EE92F4696E2008BFCE4 /* simplega */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FEE6EF02F4696E2008BFCE4 /* Build configuration list for PBXNativeTarget "simplega" */;
+			buildPhases = (
+				6FEE6EE62F4696E2008BFCE4 /* Sources */,
+				6FEE6EE72F4696E2008BFCE4 /* Frameworks */,
+				6FEE6EE82F4696E2008BFCE4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6FEE6EEB2F4696E2008BFCE4 /* simplega */,
+			);
+			name = simplega;
+			packageProductDependencies = (
+			);
+			productName = simplega;
+			productReference = 6FEE6EEA2F4696E2008BFCE4 /* simplega */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -150,6 +207,11 @@
 				CLASSPREFIX = JAS;
 				LastUpgradeCheck = 2620;
 				ORGANIZATIONNAME = iJoshSmith;
+				TargetAttributes = {
+					6FEE6EE92F4696E2008BFCE4 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+				};
 			};
 			buildConfigurationList = 4175C575152BC32300AA1A1C /* Build configuration list for PBXProject "SimpleGeneticAlgo" */;
 			developmentRegion = en;
@@ -165,6 +227,7 @@
 			projectRoot = "";
 			targets = (
 				4175C57A152BC32300AA1A1C /* SimpleGeneticAlgo */,
+				6FEE6EE92F4696E2008BFCE4 /* simplega */,
 			);
 		};
 /* End PBXProject section */
@@ -191,6 +254,15 @@
 				4175C593152BC32300AA1A1C /* JASAppDelegate.m in Sources */,
 				4175C59E152BC70C00AA1A1C /* JASGeneticAlgo.m in Sources */,
 				4175C5A4152C02F700AA1A1C /* JASChromosome.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FEE6EE62F4696E2008BFCE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FEE6EF12F4697E7008BFCE4 /* JASChromosome.m in Sources */,
+				6FEE6EF22F4697EF008BFCE4 /* JASGeneticAlgo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +424,63 @@
 			};
 			name = Release;
 		};
+		6FEE6EEE2F4696E2008BFCE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = LJWQXKAD69;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/SimpleGeneticAlgo";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6FEE6EEF2F4696E2008BFCE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = LJWQXKAD69;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/SimpleGeneticAlgo";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -369,6 +498,15 @@
 			buildConfigurations = (
 				4175C59A152BC32300AA1A1C /* Debug */,
 				4175C59B152BC32300AA1A1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FEE6EF02F4696E2008BFCE4 /* Build configuration list for PBXNativeTarget "simplega" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FEE6EEE2F4696E2008BFCE4 /* Debug */,
+				6FEE6EEF2F4696E2008BFCE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

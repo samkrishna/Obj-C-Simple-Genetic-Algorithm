@@ -35,12 +35,11 @@
 
 - (id)initWithTargetSequence:(NSString *)sequence
 {
-    self = [super init];
-    if (self)
-    {
-        self.targetSequence = sequence;
-        self.population = [NSMutableArray arrayWithCapacity:POPULATION_SIZE];
-    }
+    if (!(self = [super init])) { return nil; }
+
+    self.targetSequence = sequence;
+    self.population = [NSMutableArray arrayWithCapacity:POPULATION_SIZE];
+
     return self;
 }
 
@@ -56,8 +55,8 @@
 {
     NSUInteger geneCount = self.targetSequence.length;
     JASChromosome *chromo;
-    for (int i = 0; i < POPULATION_SIZE; ++i)
-    {
+
+    for (int i = 0; i < POPULATION_SIZE; ++i) {
         chromo = [[JASChromosome alloc] initWithGeneCount:geneCount];
         [self.population addObject:chromo];
     }

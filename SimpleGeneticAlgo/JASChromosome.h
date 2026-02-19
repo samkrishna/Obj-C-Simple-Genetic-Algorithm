@@ -22,7 +22,6 @@
 
 // Returns YES if this chromosome's fitness is better 
 // than the other chromosome's fitness.
-- (BOOL)isFitterThanChromosome:(JASChromosome *)other 
-             forTargetSequence:(NSString *)sequence;
+- (BOOL)isFitterThanChromosome:(JASChromosome *)other forTargetSequence:(NSString *)sequence;
 
 @end

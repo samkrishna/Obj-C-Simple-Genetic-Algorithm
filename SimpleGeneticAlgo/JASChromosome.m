@@ -98,7 +98,7 @@
 
 - (BOOL)isFitterThanChromosome:(JASChromosome *)other forTargetSequence:(NSString *)seq
 {
-    NSInteger mine = [self  fitnessForTargetSequence:seq];
+    NSInteger mine = [self fitnessForTargetSequence:seq];
     NSInteger theirs = [other fitnessForTargetSequence:seq];
     return mine > theirs;
 }
